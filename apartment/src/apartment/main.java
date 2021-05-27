@@ -1,8 +1,9 @@
 package apartment;
 
 import java.util.Scanner;
-import java.util.*;
-import org.json.JSONObject;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 public class main {
 
