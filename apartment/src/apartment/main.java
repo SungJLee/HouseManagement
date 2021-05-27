@@ -1,7 +1,8 @@
 package apartment;
 
+import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -9,6 +10,7 @@ public class main {
 
   public static void main(String[] args) {
 
+  	JSONArray jsonArray = new JSONArray();
     boolean swi = true; 
 		while(swi){
     System.out.println("-------------------------------------");
@@ -21,24 +23,47 @@ public class main {
 		Scanner scan = new Scanner(System.in); 
 		System.out.print("> ");
 		int choice = scan.nextInt();
-		
-		
+		Scanner scanf = new Scanner(System.in); 
+		ArrayList<House> houseArray = new ArrayList<House>();
+        for(int i = 0 ; i < 100; i++){
+            
+        }
         switch(choice){
                 case 1:
+                	
                 	System.out.println("추가할 집 호수 , 이름 , 연락처 , 어떤 타입의 집인지 알려주세요");
-                	JSONArray jsonArray = new JSONArray();
-                	for (int i = 0;i < array.size() ; i++) {
-                        JSONObject obj = new JSONObject();
-                        JSONObject objItem =  new JSONObject();
-                        objItem.put("id", array.get(i).getId());
-                        objItem.put("name",  array.get(i).getName());
-                        objItem.put("address",  array.get(i).getAddress());
-                        obj.put("employee", objItem);
-                        jsonArray.put(obj);
-                    }
+                	
+                	String temp_houseNumber = scanf.nextLine();
+                	String temp_houseName = scanf.nextLine(); 
+                	String temp_phoneNumber = scanf.nextLine();
+                	String temp_houseType = scanf.nextLine();
+                	
+                	House house = new House(temp_houseNumber,temp_houseName,temp_phoneNumber,temp_houseType);
+                	
+                	        	
+                	JSONObject obj1 = new JSONObject();
+                	obj1.put("houseNumber",temp_houseNumber);
+                	obj1.put("houseName",temp_houseNumber);
+                	obj1.put("phoneNumber",temp_houseNumber);
+                	obj1.put("houseType",temp_houseNumber);
+                	
+                	jsonArray.add(obj1);
+                	
                 	break;
           
 		        case 2:
+		        	Iterator it = jsonArray.iterator();
+		        	while(it.hasNext()) {
+		        		JSONObject o = (JSONObject)it.next();
+		        		String jsonHouse=o.get("houseNumber").toString();
+		        		String jsonName=o.get("houseName").toString();
+		        		String jsonPhone=o.get("phoneNumber").toString();
+		        		String jsonHouseType=o.get("houseType").toString();
+		        		
+		        		System.out.println("집호수는 : " + jsonHouse);
+		        		System.out.println("이름 : " + jsonName + " 전화번호 : " + jsonPhone + " 집 정보 : " + jsonHouseType);
+		        		
+		        	}
 		        	break;
           
 				case 3: 

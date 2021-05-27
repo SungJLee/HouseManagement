@@ -2,6 +2,18 @@ package apartment;
 
 public class House {
 
+	String houseNumber;
+	String houseName;
+	String phoneNumber;
+	String houseType;
+	
+	public House(String id,String name ,String phoneNumber, String houseType) {
+		this.houseNumber = id;
+		this.houseName = name;
+		this.phoneNumber = phoneNumber;
+		this.houseType = houseType;
+	}
+
 	public String getHouseNumber() {
 		return houseNumber;
 	}
@@ -26,8 +38,4 @@ public class House {
 	public void setHouseType(String houseType) {
 		this.houseType = houseType;
 	}
-	String houseNumber;
-	String houseName;
-	String phoneNumber;
-	String houseType;
 }
