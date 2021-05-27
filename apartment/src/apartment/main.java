@@ -15,19 +15,18 @@ public class main {
 		while(swi){
     System.out.println("-------------------------------------");
 	System.out.println("1. 입력하기");
-	System.out.println("2. 조회하기");
-
+	System.out.println("2. 전체 조회하기");
+	System.out.println("3. 호수로 조회하기");
+	System.out.println("4. json으로 정보보기");
     System.out.println("7. 나가기");
 			
       
 		Scanner scan = new Scanner(System.in); 
+
+		Scanner scanf = new Scanner(System.in); 
 		System.out.print("> ");
 		int choice = scan.nextInt();
-		Scanner scanf = new Scanner(System.in); 
-		ArrayList<House> houseArray = new ArrayList<House>();
-        for(int i = 0 ; i < 100; i++){
-            
-        }
+		
         switch(choice){
                 case 1:
                 	
@@ -43,9 +42,9 @@ public class main {
                 	        	
                 	JSONObject obj1 = new JSONObject();
                 	obj1.put("houseNumber",temp_houseNumber);
-                	obj1.put("houseName",temp_houseNumber);
-                	obj1.put("phoneNumber",temp_houseNumber);
-                	obj1.put("houseType",temp_houseNumber);
+                	obj1.put("houseName",temp_houseName);
+                	obj1.put("phoneNumber",temp_phoneNumber);
+                	obj1.put("houseType",temp_houseType);
                 	
                 	jsonArray.add(obj1);
                 	
@@ -67,6 +66,27 @@ public class main {
 		        	break;
           
 				case 3: 
+					System.out.println("호수를 입력해주세요 : ");
+					String checkHouseNumber = scanf.nextLine();
+					Iterator it2 = jsonArray.iterator();
+					System.out.println(jsonArray);
+		        	while(it2.hasNext()) {
+		        		
+		        		JSONObject o = (JSONObject)it2.next();
+		        		if(o.get("houseNumber").equals(checkHouseNumber)) {
+		        			String jsonHouse = o.get("houseNumber").toString();
+			        		String jsonName = o.get("houseName").toString();
+			        		String jsonPhone = o.get("phoneNumber").toString();
+			        		String jsonHouseType = o.get("houseType").toString();
+			        		System.out.println("집호수는 : " + jsonHouse);
+			        		System.out.println("이름 : " + jsonName + " 전화번호 : " + jsonPhone + " 집 정보 : " + jsonHouseType);
+			        		break;
+		        		}
+		        		
+		        		
+		        				        			        		
+		        	}
+		        	System.out.println("잘못된 house Number입니다.");
 					break;
 
 				case 4:
