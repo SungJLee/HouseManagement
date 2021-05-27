@@ -2,6 +2,7 @@ package apartment;
 
 import java.util.Scanner;
 import java.util.*;
+import org.json.JSONObject;
 
 public class main {
 
@@ -20,8 +21,20 @@ public class main {
 		System.out.print("> ");
 		int choice = scan.nextInt();
 		
+		
         switch(choice){
                 case 1:
+                	System.out.println("추가할 집 호수 , 이름 , 연락처 , 어떤 타입의 집인지 알려주세요");
+                	JSONArray jsonArray = new JSONArray();
+                	for (int i = 0;i < array.size() ; i++) {
+                        JSONObject obj = new JSONObject();
+                        JSONObject objItem =  new JSONObject();
+                        objItem.put("id", array.get(i).getId());
+                        objItem.put("name",  array.get(i).getName());
+                        objItem.put("address",  array.get(i).getAddress());
+                        obj.put("employee", objItem);
+                        jsonArray.put(obj);
+                    }
                 	break;
           
 		        case 2:
