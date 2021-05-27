@@ -12,6 +12,7 @@ public class main {
 
   public static void main(String[] args) throws IOException {
 
+	int count = 0;
   	JSONArray jsonArray = new JSONArray();
     boolean swi = true; 
 		while(swi){
@@ -42,14 +43,37 @@ public class main {
                 	
                 	House house = new House(temp_houseNumber,temp_houseName,temp_phoneNumber,temp_houseType);
                 	
-                	        	
-                	JSONObject obj1 = new JSONObject();
-                	obj1.put("houseNumber",temp_houseNumber);
-                	obj1.put("houseName",temp_houseName);
-                	obj1.put("phoneNumber",temp_phoneNumber);
-                	obj1.put("houseType",temp_houseType);
+                	Iterator it3 = jsonArray.iterator();
                 	
-                	jsonArray.add(obj1);
+                	if(count > 0) {
+                		while(it3.hasNext()) {
+    		        		
+    		        		JSONObject o = (JSONObject)it3.next();
+    		        		if(o.get("houseNumber").equals(temp_houseNumber)) {
+    		        			System.out.println(temp_houseNumber + "는 이미 있는 호수입니다.");
+    		        			break;
+    		        		}else {
+    		        			JSONObject obj1 = new JSONObject();
+    		                	obj1.put("houseNumber",temp_houseNumber);
+    		                	obj1.put("houseName",temp_houseName);
+    		                	obj1.put("phoneNumber",temp_phoneNumber);
+    		                	obj1.put("houseType",temp_houseType);
+    		                	System.out.println("작동했습니다.2");
+    		                	jsonArray.add(obj1);
+    		                	break;
+    		        		}
+    		        	}
+                	}else {
+                		JSONObject obj1 = new JSONObject();
+	                	obj1.put("houseNumber",temp_houseNumber);
+	                	obj1.put("houseName",temp_houseName);
+	                	obj1.put("phoneNumber",temp_phoneNumber);
+	                	obj1.put("houseType",temp_houseType);
+	                	System.out.println("작동했습니다.3");
+	                	jsonArray.add(obj1);
+                	}
+                	count++;
+                	
                 	
                 	break;
           
@@ -64,19 +88,21 @@ public class main {
 		        		
 		        		System.out.println("집호수는 : " + jsonHouse);
 		        		System.out.println("이름 : " + jsonName + " 전화번호 : " + jsonPhone + " 집 정보 : " + jsonHouseType);
-		        		
+
+			        	break;
 		        	}
 		        	break;
           
 				case 3: 
 					System.out.println("호수를 입력해주세요 : ");
+					boolean checkHouseNum = false;
 					String checkHouseNumber = scanf.nextLine();
 					Iterator it2 = jsonArray.iterator();
-					System.out.println(jsonArray);
 		        	while(it2.hasNext()) {
 		        		
 		        		JSONObject o = (JSONObject)it2.next();
 		        		if(o.get("houseNumber").equals(checkHouseNumber)) {
+		        			checkHouseNum = true;
 		        			String jsonHouse = o.get("houseNumber").toString();
 			        		String jsonName = o.get("houseName").toString();
 			        		String jsonPhone = o.get("phoneNumber").toString();
@@ -84,15 +110,15 @@ public class main {
 			        		System.out.println("집호수는 : " + jsonHouse);
 			        		System.out.println("이름 : " + jsonName + " 전화번호 : " + jsonPhone + " 집 정보 : " + jsonHouseType);
 			        		break;
-		        		}
-		        		
-		        		
-		        				        			        		
+		        		}	        		
 		        	}
-		        	System.out.println("잘못된 house Number입니다.");
+		        	if(checkHouseNum == false) {
+			        	System.out.println("잘못된 house Number입니다.");
+		        	}
 					break;
 
 				case 4:
+					System.out.println(jsonArray);
 					break;
           
 				case 5:
