@@ -2,13 +2,15 @@ package apartment;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class main {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
 
   	JSONArray jsonArray = new JSONArray();
     boolean swi = true; 
@@ -18,6 +20,7 @@ public class main {
 	System.out.println("2. 전체 조회하기");
 	System.out.println("3. 호수로 조회하기");
 	System.out.println("4. json으로 정보보기");
+	System.out.println("5. json으로 내보내기");
     System.out.println("7. 나가기");
 			
       
@@ -93,6 +96,10 @@ public class main {
 					break;
           
 				case 5:
+					FileWriter writer = new FileWriter("src/json/mydata.json");
+			  		writer.write(jsonArray.toJSONString());
+			  		writer.flush();
+			  		writer.close();
 					break;
 
 				case 6: 
