@@ -30,8 +30,8 @@ public class main {
 			
       
 		Scanner scan = new Scanner(System.in); 
-
 		Scanner scanf = new Scanner(System.in); 
+		
 		System.out.print("> ");
 		int choice = scan.nextInt();
 		
@@ -69,7 +69,6 @@ public class main {
 		        		System.out.println("집호수는 : " + jsonHouse);
 		        		System.out.println("이름 : " + jsonName + " 전화번호 : " + jsonPhone + " 집 정보 : " + jsonHouseType);
 
-			        	break;
 		        	}
 		        	break;
           
@@ -102,8 +101,10 @@ public class main {
 					break;
           
 				case 5:
+					JSONObject jObj = new JSONObject();
+					jObj.put("Apartment", jsonArray);
 					FileWriter writer = new FileWriter("src/json/mydata.json");
-			  		writer.write(jsonArray.toJSONString());
+			  		writer.write(jObj.toJSONString());
 			  		writer.flush();
 			  		writer.close();
 					break;
