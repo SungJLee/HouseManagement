@@ -2,15 +2,18 @@ package apartment;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class main {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, ParseException {
 
 	int count = 0;
   	JSONArray jsonArray = new JSONArray();
@@ -22,6 +25,7 @@ public class main {
 	System.out.println("3. 호수로 조회하기");
 	System.out.println("4. json으로 정보보기");
 	System.out.println("5. json으로 내보내기");
+	System.out.println("6. json파일 불러오기");
     System.out.println("7. 나가기");
 			
       
@@ -43,36 +47,12 @@ public class main {
                 	
                 	House house = new House(temp_houseNumber,temp_houseName,temp_phoneNumber,temp_houseType);
                 	
-                	Iterator it3 = jsonArray.iterator();
-                	
-                	if(count > 0) {
-                		while(it3.hasNext()) {
-    		        		
-    		        		JSONObject o = (JSONObject)it3.next();
-    		        		if(o.get("houseNumber").equals(temp_houseNumber)) {
-    		        			System.out.println(temp_houseNumber + "는 이미 있는 호수입니다.");
-    		        			break;
-    		        		}else {
-    		        			JSONObject obj1 = new JSONObject();
-    		                	obj1.put("houseNumber",temp_houseNumber);
-    		                	obj1.put("houseName",temp_houseName);
-    		                	obj1.put("phoneNumber",temp_phoneNumber);
-    		                	obj1.put("houseType",temp_houseType);
-    		                	System.out.println("작동했습니다.2");
-    		                	jsonArray.add(obj1);
-    		                	break;
-    		        		}
-    		        	}
-                	}else {
-                		JSONObject obj1 = new JSONObject();
-	                	obj1.put("houseNumber",temp_houseNumber);
-	                	obj1.put("houseName",temp_houseName);
-	                	obj1.put("phoneNumber",temp_phoneNumber);
-	                	obj1.put("houseType",temp_houseType);
-	                	System.out.println("작동했습니다.3");
-	                	jsonArray.add(obj1);
-                	}
-                	count++;
+                	JSONObject obj1 = new JSONObject();
+                	obj1.put("houseNumber",temp_houseNumber);
+                	obj1.put("houseName",temp_houseName);
+                	obj1.put("phoneNumber",temp_phoneNumber);
+                	obj1.put("houseType",temp_houseType);
+                	jsonArray.add(obj1);
                 	
                 	
                 	break;
@@ -129,6 +109,9 @@ public class main {
 					break;
 
 				case 6: 
+					JSONParser parser = new JSONParser();
+					Object obj = parser.parse(new FileReader("src/json/mydata.json"));
+					System.out.println(obj);
 					break;
 
 				case 7 : // 나가기
